@@ -1,6 +1,6 @@
 const express = require('express');
 var cors = require('cors');
-require('dotenv').config()
+require('dotenv').config();
 
 const optionsController = require('./controllers/optionsController');
 const moviesController = require('./controllers/moviesController');
@@ -18,6 +18,7 @@ app.use(cors(corsOpts));
 app.use(express.json());
 
 // Rutas para películas
+app.get('/api/movies', moviesController.getMovies);
 app.post('/api/movies', moviesController.createMovie);
 
 // Rutas para opciones
