@@ -1,11 +1,23 @@
-const pool = require('../db');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../db');
 
-const getOptions = async () => {
-  const query = 'SELECT * FROM option';
-  const { rows } = await pool.query(query);
-  return rows;
-};
+const Option = sequelize.define(
+  'option',
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    timestamps: false,
+    freezeTableName: true,
+  }
+);
 
-module.exports = {
-  getOptions,
-};
+module.exports = Option;
