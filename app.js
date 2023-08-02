@@ -9,7 +9,7 @@ const port = process.env.PORT || 3010;
 
 const corsOpts = {
   origin: '*',
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'PUT'],
   allowedHeaders: ['Content-Type'],
 };
 
@@ -23,6 +23,7 @@ app.post('/api/movies', moviesController.createMovie);
 
 // Rutas para opciones
 app.get('/api/options', optionsController.getOptions);
+app.put('/api/options/:id/toggleDisabled', optionsController.toggleOptionDisabled);
 
 app.listen(port, () => {
   console.log(`API iniciada en http://localhost:${port}`);
