@@ -13,6 +13,14 @@ const Option = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    path: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    disabled: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
   },
   {
     timestamps: false,
