@@ -1,6 +1,6 @@
 const express = require('express');
 var cors = require('cors');
-require('dotenv').config()
+require('dotenv').config();
 
 const optionsController = require('./controllers/optionsController');
 const moviesController = require('./controllers/moviesController');
@@ -9,7 +9,7 @@ const port = process.env.PORT || 3010;
 
 const corsOpts = {
   origin: '*',
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'PUT'],
   allowedHeaders: ['Content-Type'],
 };
 
@@ -18,10 +18,12 @@ app.use(cors(corsOpts));
 app.use(express.json());
 
 // Rutas para películas
+app.get('/api/movies', moviesController.getMovies);
 app.post('/api/movies', moviesController.createMovie);
 
 // Rutas para opciones
 app.get('/api/options', optionsController.getOptions);
+app.put('/api/options/:id/toggleDisabled', optionsController.toggleOptionDisabled);
 
 app.listen(port, () => {
   console.log(`API iniciada en http://localhost:${port}`);
