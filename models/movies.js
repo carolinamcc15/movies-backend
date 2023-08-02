@@ -1,13 +1,35 @@
-const pool = require('../db');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../db');
 
-const createMovie = async (movie) => {
-  const { name, budget, date, duration } = movie;
-  const query = 'INSERT INTO movie (name, budget, date, duration) VALUES ($1, $2, $3, $4) RETURNING *';
-  const values = [name, budget, date, duration];
-  const { rows } = await pool.query(query, values);
-  return rows[0];
-};
+const Movie = sequelize.define(
+  'movie',
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    budget: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    duration: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+  },
+  {
+    timestamps: false,
+    freezeTableName: true,
+  }
+);
 
-module.exports = {
-  createMovie,
-};
+module.exports = Movie;

@@ -1,30 +1,29 @@
 const express = require('express');
-var cors = require("cors");
-const moviesController = require('./controllers/moviesController');
+var cors = require('cors');
+require('dotenv').config();
+
 const optionsController = require('./controllers/optionsController');
-const app = express();
-const port = 3010; 
+const moviesController = require('./controllers/moviesController');
+
+const port = process.env.PORT || 3010;
 
 const corsOpts = {
   origin: '*',
-  methods: [
-    'GET',
-    'POST',
-  ],
-  allowedHeaders: [
-    'Content-Type',
-  ],
+  methods: ['GET', 'POST', 'PUT'],
+  allowedHeaders: ['Content-Type'],
 };
 
+const app = express();
 app.use(cors(corsOpts));
-
 app.use(express.json());
 
 // Rutas para películas
+app.get('/api/movies', moviesController.getMovies);
 app.post('/api/movies', moviesController.createMovie);
 
 // Rutas para opciones
 app.get('/api/options', optionsController.getOptions);
+app.put('/api/options/:id/toggleDisabled', optionsController.toggleOptionDisabled);
 
 app.listen(port, () => {
   console.log(`API iniciada en http://localhost:${port}`);
