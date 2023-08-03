@@ -1,10 +1,10 @@
 const moviesService = require('../services/moviesService');
 
 const getMovies = async (req, res) => {
-  const { year } = req.query;
+  const { year, limit, offset } = req.query;
 
   try {
-    const movies = await moviesService.getMovies(year);
+    const movies = await moviesService.getMovies(year, limit, offset);
     res.status(200).json(movies);
   } catch (error) {
     console.log(error);

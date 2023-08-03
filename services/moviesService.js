@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
 const Movie = require('../models/movies');
 
-const getMovies = async year => {
+const getMovies = async (year, limit = 20, offset = 0) => {
   try {
     let movies;
     if (year) {
@@ -11,9 +11,12 @@ const getMovies = async year => {
             [Op.between]: [`${year}-01-01`, `${year}-12-31`],
           },
         },
+        order: [['id', 'DESC']],
+        offset,
+        limit,
       });
     } else {
-      movies = await Movie.findAll();
+      movies = await Movie.findAll({ order: [['id', 'DESC']], offset, limit });
     }
     return movies;
   } catch (error) {
