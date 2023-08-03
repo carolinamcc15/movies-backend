@@ -1,6 +1,6 @@
 # :zap: TalleresT Test - Movies Backend
 Proyecto para API de prueba técnica TalleresT.
-
+***
 ## :computer: Instalación
 Como requisito para el proyecto, se debe tener **PostgreSQL** y **Node** instalado en la computadora.
 
@@ -19,7 +19,7 @@ Como requisito para el proyecto, se debe tener **PostgreSQL** y **Node** instala
   DATABASE_PASSWORD = ""
   ```
 3. Ejecuta la aplicación por medio del comando `npm run start`. Este será accesible en el puerto especificado en las variables de entorno.
-
+***
 ## :globe_with_meridians: API Endpoints
 ### Películas
 `GET /movies` -> Obtiene todas las películas y es posible filtrarlas por año con el query param *year*.  
@@ -27,6 +27,6 @@ Como requisito para el proyecto, se debe tener **PostgreSQL** y **Node** instala
 ### Opciones
 `GET /options` -> Obtiene todas las opciones.  
 `PUT /options/:id/toggleDisabled` -> Permite cambiar el valor del campo *disabled*.
-
+***
 ## :pushpin: Notas
 - Se utilizó `sequelize` como ORM para Nodejs con el fin de manipular la bases de datos de una manera más sencilla.
