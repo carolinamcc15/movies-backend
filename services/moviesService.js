@@ -11,9 +11,10 @@ const getMovies = async year => {
             [Op.between]: [`${year}-01-01`, `${year}-12-31`],
           },
         },
+        order: [['id', 'DESC']],
       });
     } else {
-      movies = await Movie.findAll();
+      movies = await Movie.findAll({ order: [['id', 'DESC']] });
     }
     return movies;
   } catch (error) {
