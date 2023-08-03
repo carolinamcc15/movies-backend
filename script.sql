@@ -20,3 +20,9 @@ INSERT INTO option (name, path) VALUES
 ('Formulario', '/formulario'),
 ('Renta de películas', '/rentar-pelicula'),
 ('Administrar opciones', '/administrar-opciones');
+
+INSERT INTO movie (name, budget, date, duration) VALUES
+('Titanic', 295000000, '1997-11-01', 194),
+('Super Mario Bros', 100000000, '2023-04-05', 132),
+('Annabelle', 6500000, '2014-10-03', 98),
+('Fractura', 5000000, '2019-09-22', 100)
