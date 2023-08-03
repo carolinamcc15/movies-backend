@@ -1,13 +1,11 @@
-const Option = require('../models/options');
+const optionsService = require('../services/optionsService');
 
-const getOptions = async (req, res) => {
+const getOptions = async (_req, res) => {
   try {
-    const options = await Option.findAll({
-      order: [['id', 'ASC']],
-    });
+    const options = await optionsService.getOptions();
     res.json(options);
   } catch (error) {
-    res.status(500).json({ error: 'Error al obtener las opciones' });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -15,18 +13,15 @@ const toggleOptionDisabled = async (req, res) => {
   const optionId = req.params.id;
 
   try {
-    const foundOption = await Option.findByPk(optionId);
+    const result = await optionsService.toggleOptionDisabled(optionId);
 
-    if (!foundOption) {
+    if (result === null) {
       res.status(404).json({ error: 'The resource was not found' });
+    } else {
+      res.status(200).json(result);
     }
-
-    foundOption.disabled = !foundOption.disabled;
-    await foundOption.save();
-
-    res.json({ message: 'Disabled value updated' });
-  } catch (err) {
-    res.status(500);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
 
